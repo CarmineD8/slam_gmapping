@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot2_laser_xacro">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot_encoder_xacro">
 <xacro:include filename="$(find gmapping)/urdf/robot_encoder_laser.gazebo"/>
 					
 	<xacro:property name="length_wheel" value="0.04" />
