@@ -3,6 +3,7 @@
  #include "ros/ros.h"
  #include <nav_msgs/Odometry.h>
  #include <geometry_msgs/Quaternion.h>
+ #include <geometry_msgs/Twist.h>
  
  #define _USE_MATH_DEFINES
     
@@ -54,7 +55,7 @@
    ros::NodeHandle nh("~");
  
    ros::Subscriber sub = nh.subscribe("/odom", 1, odomCallback);
-   ros::Publisher pub = nh.advertise<nav_msgs::Odometry>("/gmapping_odom", 1);
+   ros::Publisher pub = nh.advertise<geometry_msgs::Twist>("/gmapping_odom", 1);
    
    ros::Rate rate(20.0);
    double x_t, y_t;
@@ -96,23 +97,12 @@
          std::cout << "- Odometry: [" << x << ", " << y << ", " << yaw_  << "]" << std::endl;
          std::cout << "- Position correct by gmapping: [" << x_t << ", " << y_t << ", " << yaw_ + yaw << "]" << std::endl;
          
-         /*tf::Quaternion quat;
-         quat.setEuler(yaw_ + yaw, pitch, roll);
-         geometry_msgs::Quaternion quat_msg;
-         tf::quaternionTFToMsg(quat, quat_msg);
          
-         nav_msgs::Odometry my_odom;
-         my_odom.pose.pose.position.x = x_t;
-         my_odom.pose.pose.position.y = y_t;
-         my_odom.pose.pose.position.z = 0.05;
-         my_odom.pose.pose.orientation.x = quat_msg.x;
-         my_odom.pose.pose.orientation.y = quat_msg.z;
-         my_odom.pose.pose.orientation.z = quat_msg.y;
-         my_odom.pose.pose.orientation.w = quat_msg.w;
-         pub.publish(my_odom);*/
-         
-         
-         
+         geometry_msgs::Twist pos;
+         pos.linear.x = x_t;
+         pos.linear.y = y_t;
+         pos.angular.z = yaw_ + yaw;
+         pub.publish(pos);
          
        }
        catch(tf::TransformException& ex)
