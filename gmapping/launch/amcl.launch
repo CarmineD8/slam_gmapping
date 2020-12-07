@@ -5,7 +5,7 @@
     <node pkg="amcl" type="amcl" name="amcl" output="screen">
       <param name="base_frame_id" value="link_chassis"/>
       <param name="min_particles" value="1000"/>
-      <param name="max_particles" value="50000"/>
+      <param name="max_particles" value="5000"/>
       <param name="odom_alpha1" value="2"/>
       <param name="odom_alpha2" value="2"/>
     </node>
