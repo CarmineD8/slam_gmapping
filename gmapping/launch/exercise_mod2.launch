@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <launch>
-	<include file="$(find gmapping)/launch/sim_w1.launch" output="log"></include>
+	<include file="$(find gmapping)/launch/sim_w1.launch"></include>
 
     <arg name="des_x" default= "1"/>
     <arg name="des_y" default= "1"/>
